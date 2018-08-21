@@ -1,0 +1,29 @@
+cabal-version: 2.0
+name: text-short-shim
+version: 0.1.0.0
+description: Please see the README on GitHub at <https://github.com/andrewthad/text-short-shim#readme>
+homepage: https://github.com/andrewthad/text-short-shim#readme
+bug-reports: https://github.com/andrewthad/text-short-shim/issues
+author: Andrew Martin
+maintainer: andrew.thaddeus@gmail.com
+copyright: 2018 Andrew Martin
+license: BSD3
+license-file: LICENSE
+build-type: Simple
+extra-source-files: README.md
+
+source-repository head
+  type: git
+  location: https://github.com/andrewthad/text-short-shim
+
+library
+  exposed-modules:
+    Data.Text.Short
+    Data.Text.Short.Unsafe
+  hs-source-dirs: src
+  build-depends:
+      base >= 4.9 && <5
+    , text >= 1.2
+    , bytestring >= 0.10.8
+  default-language: Haskell2010
+
