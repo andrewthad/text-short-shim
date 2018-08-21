@@ -1,3 +1,4 @@
+{-# language GeneralizedNewtypeDeriving #-}
 {-# language ScopedTypeVariables #-}
 {-# language TypeApplications #-}
 
@@ -99,10 +100,16 @@ import Prelude hiding (reverse,filter,map,span,take,
 
 import Data.ByteString (ByteString)
 import Data.Coerce (coerce)
+import Data.Hashable (Hashable)
+import Data.Binary (Binary)
+import Control.DeepSeq (NFData)
+import Text.Printf (PrintfArg)
+import Data.String (IsString)
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as TE
 
 newtype ShortText = ShortText T.Text
+  deriving (Eq,Ord,Read,Show,Semigroup,Monoid,PrintfArg,Binary,NFData,Hashable,IsString)
 
 toText :: ShortText -> T.Text
 toText = coerce
