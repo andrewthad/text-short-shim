@@ -83,8 +83,8 @@ module Data.Text.Short
     -- , fromShortByteString
     -- , toShortByteString
 
-    -- , fromByteString
-    -- , toByteString
+    , fromByteString
+    , toByteString
 
     -- , toBuilder
 
@@ -93,8 +93,10 @@ module Data.Text.Short
 import Prelude hiding (reverse,filter,map,span,take,
   drop,foldl,foldr,concat,replicate,null,length,all,any,
   dropWhile,takeWhile)
-
 import Data.Text
+
+import Data.ByteString (ByteString)
+import qualified Data.Text.Encoding as TE
 
 type ShortText = Text
 
@@ -109,4 +111,10 @@ toString = unpack
 
 fromString :: String -> ShortText
 fromString = pack
+
+fromByteString :: ByteString -> Maybe ShortText
+fromByteString = either (const Nothing) Just . TE.decodeUtf8'
+
+toByteString :: ShortText -> ByteString
+toByteString = TE.encodeUtf8
 
