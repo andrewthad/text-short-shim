@@ -85,7 +85,7 @@ module Data.Text.Short
 
       -- ** 'ByteString'
     -- , fromShortByteString
-    -- , toShortByteString
+    , toShortByteString
 
     , fromByteString
     , toByteString
@@ -105,8 +105,10 @@ import Data.Binary (Binary)
 import Control.DeepSeq (NFData)
 import Text.Printf (PrintfArg)
 import Data.String (IsString)
+import Data.ByteString.Short (ShortByteString)
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as TE
+import qualified Data.ByteString.Short as BS
 
 newtype ShortText = ShortText T.Text
   deriving (Eq,Ord,Read,Show,Semigroup,Monoid,PrintfArg,Binary,NFData,Hashable,IsString)
@@ -242,4 +244,7 @@ uncons = coerce T.uncons
 
 unsnoc :: ShortText -> Maybe (ShortText, Char)
 unsnoc = coerce T.unsnoc
+
+toShortByteString :: ShortText -> ShortByteString
+toShortByteString (ShortText t) = BS.toShort (TE.encodeUtf8 t)
 
